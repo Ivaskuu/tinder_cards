@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'profile_card.dart';
+import 'dart:math';
 
 class CardsSectionAlignment extends StatefulWidget
 {
@@ -12,6 +13,13 @@ class _CardsSectionState extends State<CardsSectionAlignment>
   bool dragOverTarget = false;
   List<ProfileCard> cards = new List();
   int cardsCounter = 0;
+
+  final Alignment backCardAlign = new Alignment(0.0, 0.8);
+  final Alignment middleCardAlign = new Alignment(0.0, 0.55);
+  final Alignment defaultFrontCardAlign = new Alignment(0.0, 0.0);
+  Alignment frontCardAlign = new Alignment(0.0, 0.0);
+
+  double frontCardRot = 0.0;
 
   @override
   void initState()
@@ -33,25 +41,10 @@ class _CardsSectionState extends State<CardsSectionAlignment>
       (
         children: <Widget>
         [
-          // Drag target row
-          new Row
-          (
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>
-            [
-              dragTarget(),
-              new Flexible
-              (
-                flex: 2,
-                child: new Container()
-              ),
-              dragTarget()
-            ],
-          ),
           // Back card
           new Align
           (
-            alignment: new Alignment(0.0, 0.8),
+            alignment: backCardAlign,
             child: new IgnorePointer(child: new SizedBox.fromSize
             (
               size: new Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.height * 0.5),
@@ -61,7 +54,7 @@ class _CardsSectionState extends State<CardsSectionAlignment>
           // Middle card
           new Align
           (
-            alignment: new Alignment(0.0, 0.55),
+            alignment: middleCardAlign,
             child: new IgnorePointer(child: new SizedBox.fromSize
             (
               size: new Size(MediaQuery.of(context).size.width * 0.85, MediaQuery.of(context).size.height * 0.55),
@@ -71,21 +64,54 @@ class _CardsSectionState extends State<CardsSectionAlignment>
           // Front card
           new Align
           (
-            alignment: new Alignment(0.0, 0.0),
-            child: new Draggable
+            alignment: frontCardAlign,
+            child: new SizedBox.fromSize
             (
-              feedback: new SizedBox.fromSize
+              size: new Size(MediaQuery.of(context).size.width * 0.9, MediaQuery.of(context).size.height * 0.6),
+              child: new Transform.rotate
               (
-                size: new Size(MediaQuery.of(context).size.width * 0.9, MediaQuery.of(context).size.height * 0.6),
+                angle: (pi / 180.0) * frontCardRot,
                 child: cards[0],
               ),
-              child: new SizedBox.fromSize
-              (
-                size: new Size(MediaQuery.of(context).size.width * 0.9, MediaQuery.of(context).size.height * 0.6),
-                child: cards[0],
-              ),
-              childWhenDragging: new Container(),
             ),
+          ),
+          new SizedBox.expand
+          (
+            child: new GestureDetector
+            (
+              // While dragging the first card
+              onPanUpdate: (DragUpdateDetails details)
+              {
+                // Add what the user swiped in the last frame to the alignment of the card
+                setState(()
+                {
+                  // 20 is the "speed" at which moves the card
+                  frontCardAlign = new Alignment
+                  (
+                    frontCardAlign.x + 20 * details.delta.dx / MediaQuery.of(context).size.width,
+                    frontCardAlign.y + 20 * details.delta.dy / MediaQuery.of(context).size.height
+                  );
+                  
+                  frontCardRot = frontCardAlign.x /* * rotation speed */;
+                });
+              },
+              // When releasing the first card
+              onPanEnd: (_)
+              {
+                // If the front card was swiped far enough to count as swiped
+                if(frontCardAlign.x > 3.0 || frontCardAlign.x < -3.0)
+                {
+                  changeCardsOrder();
+                }
+
+                // Return to the initial rotation and alignment
+                setState(()
+                {
+                  frontCardAlign = defaultFrontCardAlign;
+                  frontCardRot = 0.0;
+                });
+              },
+            )
           ),
         ],
       )
@@ -105,31 +131,5 @@ class _CardsSectionState extends State<CardsSectionAlignment>
       cards[2] = new ProfileCard(cardsCounter);
       cardsCounter++;
     });
-  }
-
-  Widget dragTarget()
-  {
-    return new Flexible
-    (
-      flex: 1,
-      child: new DragTarget
-      (
-        builder: (_, __, ___)
-        {
-          return new Container(color: dragOverTarget ? Colors.red : Colors.transparent);
-        },
-        onWillAccept: (_)
-        {
-          setState(() => dragOverTarget = true);
-          return true;
-        },
-        onAccept: (_)
-        {
-          changeCardsOrder();
-          setState(() => dragOverTarget = false);
-        },
-        onLeave: (_) => setState(() => dragOverTarget = false)
-      ),
-    );
   }
 }
