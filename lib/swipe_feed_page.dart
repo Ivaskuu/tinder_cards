@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'cards_section_alignment.dart';
+import 'cards_section_draggable.dart';
 
 class SwipeFeedPage extends StatefulWidget
 {
@@ -9,6 +10,8 @@ class SwipeFeedPage extends StatefulWidget
 
 class _SwipeFeedPageState extends State<SwipeFeedPage>
 {
+  bool showAlignmentCards = false;
+  
   @override
   Widget build(BuildContext context)
   {
@@ -24,7 +27,12 @@ class _SwipeFeedPageState extends State<SwipeFeedPage>
           onPressed: () {},
           icon: new Icon(Icons.settings, color: Colors.grey)
         ),
-        title: new Text('tinder', style: new TextStyle(color: Colors.red, fontSize: 22.0, fontWeight: FontWeight.w700)),
+        title: new Switch
+        (
+          onChanged: (bool newValue) => setState(() => showAlignmentCards = newValue),
+          value: showAlignmentCards,
+          activeColor: Colors.red,
+        ),
         actions: <Widget>
         [
           new IconButton
@@ -39,7 +47,7 @@ class _SwipeFeedPageState extends State<SwipeFeedPage>
       (
         children: <Widget>
         [
-          new CardsSectionAlignment(),
+          showAlignmentCards ? new CardsSectionAlignment() : new CardsSectionDraggable(),
           buttonsRow()
         ],
       ),
