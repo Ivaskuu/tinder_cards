@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tinder_cards.iml" filepath="$PROJECT_DIR$/tinder_cards.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tinder_cards_android.iml" filepath="$PROJECT_DIR$/tinder_cards_android.iml" />
+    </modules>
+  </component>
+</project>
