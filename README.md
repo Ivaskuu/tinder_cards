@@ -1,12 +1,18 @@
 # Tinder cards
 
-Hi! After showcasing my app (Focus for Reddit client), people asked me how did I do the tinder like cards swipe (posts media are shown as a stack of 3 swipable cards) and if I could make tutorial or open-source it.
+Hi! After showcasing [Focus for Reddit](https://play.google.com/store/apps/details?id=com.skuu.focusreddit), the app I am working on, people asked me how did I do the tinder like cards swipe (posts media are shown as a stack of 3 swipable cards) and if I could make tutorial or open-source it:
+
+![Focus for Reddit preview](https://i.imgur.com/vVyY7O5.gif)
 
 And I did it! Here it is. I've created a Tinder like user interface (not working, that's not the point).
 
+![Focus for Reddit preview](https://i.imgur.com/PM9AhLX.gif)
+
 I've found 2 ways of doing this (there may be way more ways)
- [ ] Using Draggable
- [ ] Using GestureDetector and Alignment (what I use for my app)
+ - Using Draggable
+ - Using GestureDetector and Alignment (what I use for my app)
+
+P.S: Use the appBar switch to go from Draggable cards section to GestureDetector and Alignment cards section.
 
 # Draggable
 This technique uses the already implemented drag system in Flutter. It's also pretty easy to set up:
@@ -29,6 +35,11 @@ The card rotation is then calculated based on the front card x alignment. On fin
    - ProfileCard
    - ProfileCard
    - GestureDetector
+  
+## How animation works
+// TODO
+
+<hr>
 
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).

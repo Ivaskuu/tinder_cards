@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ProfileCard extends StatelessWidget
+class ProfileCardDraggable extends StatelessWidget
 {
   final int cardNum;
-  ProfileCard(this.cardNum);
+  ProfileCardDraggable(this.cardNum);
 
   @override
   Widget build(BuildContext context)

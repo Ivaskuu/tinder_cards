@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'profile_card.dart';
+import 'profile_card_draggable.dart';
 
 class CardsSectionDraggable extends StatefulWidget
 {
@@ -10,7 +10,7 @@ class CardsSectionDraggable extends StatefulWidget
 class _CardsSectionState extends State<CardsSectionDraggable>
 {
   bool dragOverTarget = false;
-  List<ProfileCard> cards = new List();
+  List<ProfileCardDraggable> cards = new List();
   int cardsCounter = 0;
 
   @override
@@ -20,7 +20,7 @@ class _CardsSectionState extends State<CardsSectionDraggable>
 
     for (cardsCounter = 0; cardsCounter < 3; cardsCounter++)
     {
-      cards.add(new ProfileCard(cardsCounter));
+      cards.add(new ProfileCardDraggable(cardsCounter));
     }
   }
 
@@ -51,7 +51,7 @@ class _CardsSectionState extends State<CardsSectionDraggable>
           // Back card
           new Align
           (
-            alignment: new Alignment(0.0, 0.8),
+            alignment: new Alignment(0.0, 1.0),
             child: new IgnorePointer(child: new SizedBox.fromSize
             (
               size: new Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.height * 0.5),
@@ -61,7 +61,7 @@ class _CardsSectionState extends State<CardsSectionDraggable>
           // Middle card
           new Align
           (
-            alignment: new Alignment(0.0, 0.55),
+            alignment: new Alignment(0.0, 0.8),
             child: new IgnorePointer(child: new SizedBox.fromSize
             (
               size: new Size(MediaQuery.of(context).size.width * 0.85, MediaQuery.of(context).size.height * 0.55),
@@ -102,7 +102,7 @@ class _CardsSectionState extends State<CardsSectionDraggable>
       cards[1] = cards[2];
       cards[2] = temp;
 
-      cards[2] = new ProfileCard(cardsCounter);
+      cards[2] = new ProfileCardDraggable(cardsCounter);
       cardsCounter++;
     });
   }
