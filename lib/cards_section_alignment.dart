@@ -65,7 +65,7 @@ class _CardsSectionState extends State<CardsSectionAlignment> with SingleTickerP
           frontCard(),
 
           // Prevent swiping if the cards are animating
-          _controller.status == AnimationStatus.forward ? new SizedBox.expand
+          _controller.status != AnimationStatus.forward ? new SizedBox.expand
           (
             child: new GestureDetector
             (
