@@ -1,39 +1,31 @@
 import 'package:flutter/material.dart';
 
-class ProfileCardDraggable extends StatelessWidget
-{
+class ProfileCardDraggable extends StatelessWidget {
   final int cardNum;
   ProfileCardDraggable(this.cardNum);
 
   @override
-  Widget build(BuildContext context)
-  {
-    return new Card
-    (
-      child: new Column
-      (
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>
-        [
-          new Expanded
-          (
-            child: new Image.asset('res/portrait.jpeg', fit: BoxFit.cover),
+        children: <Widget>[
+          Expanded(
+            child: Image.asset('res/portrait.jpeg', fit: BoxFit.cover),
           ),
-          new Container
-          (
-            padding: new EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
-            child: new Column
-            (
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>
-              [
-                new Text('Card number $cardNum', style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700)),
-                new Padding(padding: new EdgeInsets.only(bottom: 8.0)),
-                new Text('A short description.', textAlign: TextAlign.start),
-              ],
-            )
-          )
+          Container(
+              padding: EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Card number $cardNum',
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w700)),
+                  Padding(padding: EdgeInsets.only(bottom: 8.0)),
+                  Text('A short description.', textAlign: TextAlign.start),
+                ],
+              ))
         ],
       ),
     );
