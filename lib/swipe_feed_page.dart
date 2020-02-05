@@ -2,97 +2,77 @@ import 'package:flutter/material.dart';
 import 'cards_section_alignment.dart';
 import 'cards_section_draggable.dart';
 
-class SwipeFeedPage extends StatefulWidget
-{
+class SwipeFeedPage extends StatefulWidget {
   @override
-  _SwipeFeedPageState createState() => new _SwipeFeedPageState();
+  _SwipeFeedPageState createState() => _SwipeFeedPageState();
 }
 
-class _SwipeFeedPageState extends State<SwipeFeedPage>
-{
+class _SwipeFeedPageState extends State<SwipeFeedPage> {
   bool showAlignmentCards = false;
-  
+
   @override
-  Widget build(BuildContext context)
-  {
-    return new Scaffold
-    (
-      appBar: new AppBar
-      (
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Colors.white,
-        leading: new IconButton
-        (
-          onPressed: () {},
-          icon: new Icon(Icons.settings, color: Colors.grey)
-        ),
-        title: new Switch
-        (
-          onChanged: (bool newValue) => setState(() => showAlignmentCards = newValue),
+        leading: IconButton(
+            onPressed: () {}, icon: Icon(Icons.settings, color: Colors.grey)),
+        title: Switch(
+          onChanged: (bool value) => setState(() => showAlignmentCards = value),
           value: showAlignmentCards,
           activeColor: Colors.red,
         ),
-        actions: <Widget>
-        [
-          new IconButton
-          (
-            onPressed: () {},
-            icon: new Icon(Icons.question_answer, color: Colors.grey)
-          ),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.question_answer, color: Colors.grey)),
         ],
       ),
       backgroundColor: Colors.white,
-      body: new Column
-      (
-        children: <Widget>
-        [
-          showAlignmentCards ? new CardsSectionAlignment(context) : new CardsSectionDraggable(),
+      body: Column(
+        children: <Widget>[
+          showAlignmentCards
+              ? CardsSectionAlignment(context)
+              : CardsSectionDraggable(),
           buttonsRow()
         ],
       ),
     );
   }
 
-  Widget buttonsRow()
-  {
-    return new Container
-    (
-      margin: new EdgeInsets.symmetric(vertical: 48.0),
-      child: new Row
-      (
+  Widget buttonsRow() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 48.0),
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>
-        [
-          new FloatingActionButton
-          (
+        children: <Widget>[
+          FloatingActionButton(
             mini: true,
             onPressed: () {},
             backgroundColor: Colors.white,
-            child: new Icon(Icons.loop, color: Colors.yellow),
+            child: Icon(Icons.loop, color: Colors.yellow),
           ),
-          new Padding(padding: new EdgeInsets.only(right: 8.0)),
-          new FloatingActionButton
-          (
+          Padding(padding: EdgeInsets.only(right: 8.0)),
+          FloatingActionButton(
             onPressed: () {},
             backgroundColor: Colors.white,
-            child: new Icon(Icons.close, color: Colors.red),
+            child: Icon(Icons.close, color: Colors.red),
           ),
-          new Padding(padding: new EdgeInsets.only(right: 8.0)),
-          new FloatingActionButton
-          (
+          Padding(padding: EdgeInsets.only(right: 8.0)),
+          FloatingActionButton(
             onPressed: () {},
             backgroundColor: Colors.white,
-            child: new Icon(Icons.favorite, color: Colors.green),
+            child: Icon(Icons.favorite, color: Colors.green),
           ),
-          new Padding(padding: new EdgeInsets.only(right: 8.0)),
-          new FloatingActionButton
-          (
+          Padding(padding: EdgeInsets.only(right: 8.0)),
+          FloatingActionButton(
             mini: true,
             onPressed: () {},
             backgroundColor: Colors.white,
-            child: new Icon(Icons.star, color: Colors.blue),
+            child: Icon(Icons.star, color: Colors.blue),
           ),
         ],
       ),
